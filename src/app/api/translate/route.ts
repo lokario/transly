@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import redis from "./redis";
+import redis from "@/lib/redis"; 
 
 export async function POST(req: NextRequest) {
 	const { text, sourceLang, targetLang } = await req.json();
