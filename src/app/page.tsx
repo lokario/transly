@@ -1,89 +1,56 @@
 "use client";
 
-import { useState } from "react";
-import axios from "axios";
+import { Grid, GridItem } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
+import ChatBot from "./components/ChatBot";
+import SideBar from "./components/SideBar";
+import { useTranslation } from "./hooks/useTranslation";
+import "./styles/globals.css";
 
-interface Message {
-	original: string;
-	translated: string;
+export interface Message {
+	isOwn: boolean;
+	msg: string;
 }
 
 export default function Home() {
-	const [text, setText] = useState<string>("");
 	const [sourceLang, setSourceLang] = useState<string>("en");
 	const [targetLang, setTargetLang] = useState<string>("es");
 	const [messages, setMessages] = useState<Message[]>([]);
-	const [error, setError] = useState<string | null>(null);
 
-	const handleSendMessage = async () => {
-		if (!text.trim()) {
-			setError("Message cannot be empty.");
-			return;
-		}
+	const { translateMessage, loading, error } = useTranslation();
 
-		try {
-			const response = await axios.post("/api/translate", { text, sourceLang, targetLang });
-			const translatedText = response.data.translatedText;
-
-			setMessages(prevMessages => [...prevMessages, { original: text, translated: translatedText }]);
-
-			setText("");
-			setError(null);
-		} catch (err) {
-			setError("Translation failed. Please try again.");
-			console.error("Translation error:", err);
-		}
+	const handleSendMessage = async (msgText: string) => {
+		const translatedText = await translateMessage(msgText, sourceLang, targetLang);
+		setMessages(prevMessages => [...prevMessages, { isOwn: true, msg: msgText }]);
+		if (translatedText) setMessages(prevMessages => [...prevMessages, { isOwn: false, msg: translatedText }]);
 	};
 
+	const handleSourceLang = (lang: string) => setSourceLang(lang);
+
+	const handleTargetLang = (lang: string) => setTargetLang(lang);
+
 	return (
-		<div>
-			<h1>Translation Chatbot</h1>
-
-			<textarea
-				placeholder="Type a message"
-				value={text}
-				onChange={e => setText(e.target.value)}
-			/>
-
-			<div>
-				<label>
-					Source Language:
-					<select
-						value={sourceLang}
-						onChange={e => setSourceLang(e.target.value)}>
-						<option value="en">English</option>
-						<option value="es">Spanish</option>
-					</select>
-				</label>
-
-				<label>
-					Target Language:
-					<select
-						value={targetLang}
-						onChange={e => setTargetLang(e.target.value)}>
-						<option value="es">Spanish</option>
-						<option value="en">English</option>
-					</select>
-				</label>
-			</div>
-
-			<button onClick={handleSendMessage}>Send</button>
-
-			{error && <p style={{ color: "red" }}>{error}</p>}
-
-			<div>
-				<h3>Messages:</h3>
-				{messages.map((msg, index) => (
-					<div key={index}>
-						<p>
-							<strong>Original:</strong> {msg.original}
-						</p>
-						<p>
-							<strong>Translated:</strong> {msg.translated}
-						</p>
-					</div>
-				))}
-			</div>
-		</div>
+		<Grid
+			templateAreas={`"side main"`}
+			gridTemplateRows={"1fr"}
+			gridTemplateColumns={"260px 1fr"}
+			bg="white"
+			h="100vh">
+			<GridItem
+				bg="pink.300"
+				area={"side"}>
+				<SideBar />
+			</GridItem>
+			<GridItem area={"main"}>
+				<ChatBot
+					messages={messages}
+					sourceLang={sourceLang}
+					targetLang={targetLang}
+					onSourceLang={handleSourceLang}
+					onTargetLang={handleTargetLang}
+					onMsgSend={handleSendMessage}
+				/>
+			</GridItem>
+		</Grid>
 	);
 }

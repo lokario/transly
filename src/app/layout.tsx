@@ -1,19 +1,21 @@
-import type { Metadata } from "next";
+"use client";
+
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import "./styles/globals.css";
+import theme from "./styles/theme";
 
-export const metadata: Metadata = {
-	title: "Language Translation Chatbot",
-	description: "A chatbot that can translate text between multiple languages in real-time within a chat interface",
-};
-
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body>{children}</body>
+			<head>
+				<title>Translation Chatbot</title>
+			</head>
+			<body>
+				<ChakraProvider theme={theme}>
+					<ColorModeScript initialColorMode={theme.config.initialColorMode} />
+					{children}
+				</ChakraProvider>
+			</body>
 		</html>
 	);
 }
