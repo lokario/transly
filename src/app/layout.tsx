@@ -9,10 +9,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en">
 			<head>
 				<title>Translation Chatbot</title>
+				<meta
+					name="description"
+					content="A chatbot that provides translations"
+				/>
 			</head>
 			<body>
 				<ChakraProvider theme={theme}>
-					<ColorModeScript initialColorMode={theme.config.initialColorMode} />
+					{/* <ColorModeScript initialColorMode={theme.config.initialColorMode} /> */}
 					{children}
 				</ChakraProvider>
 			</body>
