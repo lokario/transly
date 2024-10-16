@@ -1,10 +1,11 @@
-import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Flex, Grid, GridItem } from "@chakra-ui/react";
 import Messages from "../Messages/Messages";
 import Entry from "../Entry";
 import Topbar from "../TopBar";
 import { Message } from "@/app/page";
 
 interface ChatBotProps {
+	error: string;
 	targetLang: string;
 	sourceLang: string;
 	messages: Message[];
@@ -13,7 +14,7 @@ interface ChatBotProps {
 	onTargetLang: (lang: string) => void;
 }
 
-function ChatBot({ onMsgSend, targetLang, sourceLang, messages, onSourceLang, onTargetLang }: ChatBotProps) {
+function ChatBot({ onMsgSend, error, targetLang, sourceLang, messages, onSourceLang, onTargetLang }: ChatBotProps) {
 	return (
 		<Grid
 			templateAreas={`"top" "messages"`}
@@ -36,6 +37,16 @@ function ChatBot({ onMsgSend, targetLang, sourceLang, messages, onSourceLang, on
 					padding="1rem 2rem"
 					direction="column"
 					height="calc(100vh - 8rem)">
+					{error && (
+						<Alert
+							status="error"
+							mb={4}
+							borderRadius="md">
+							<AlertIcon />
+							<AlertTitle mr={2}>An Error Occurred:</AlertTitle>
+							<AlertDescription>{error}</AlertDescription>
+						</Alert>
+					)}
 					<Box
 						flex="1"
 						overflowY="auto"
