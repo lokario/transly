@@ -1,17 +1,17 @@
 "use client";
 
-import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Grid, GridItem, useDisclosure, useToast } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Grid, GridItem, useDisclosure, useToast } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import ChatBot from "./components/ChatBot";
 import SideBar from "./components/SideBar";
-import { useTranslation } from "./hooks/useTranslation";
 import { useChatSessions } from "./hooks/useChatSessions";
-import "./styles/globals.css";
 import { useMessages } from "./hooks/useMessages";
+import { useTranslation } from "./hooks/useTranslation";
+import "./styles/globals.css";
+import { useLangPreferences } from "./hooks/useLangPreferences";
 
 export default function Home() {
-	const [sourceLang, setSourceLang] = useState<string>("en");
-	const [targetLang, setTargetLang] = useState<string>("es");
+	const { sourceLang, targetLang, saveSourceLang, saveTargetLang } = useLangPreferences();
 
 	const toast = useToast();
 	const cancelRef = useRef(null);
@@ -56,9 +56,9 @@ export default function Home() {
 		onOpen();
 	};
 
-	const handleSourceLang = (lang: string) => setSourceLang(lang);
+	const handleSourceLang = (lang: string) => saveSourceLang(lang);
 
-	const handleTargetLang = (lang: string) => setTargetLang(lang);
+	const handleTargetLang = (lang: string) => saveTargetLang(lang);
 
 	return (
 		<>
