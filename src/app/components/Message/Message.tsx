@@ -21,7 +21,7 @@ function Message({ text, isOwn }: MessageProps) {
 			)}
 
 			<Flex
-				bg={isOwn ? "#4160FA" : "white"}
+				bg={isOwn ? "brand.accent" : "white"}
 				alignItems="center"
 				borderRadius="100"
 				boxShadow={isOwn ? "msgOwn" : "msgOther"}

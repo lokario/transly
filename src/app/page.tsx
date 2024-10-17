@@ -9,6 +9,7 @@ import { useMessages } from "./hooks/useMessages";
 import { useTranslation } from "./hooks/useTranslation";
 import "./styles/globals.css";
 import { useLangPreferences } from "./hooks/useLangPreferences";
+import PrivacyConsent from "./components/PrivacyConsent";
 
 export default function Home() {
 	const { sourceLang, targetLang, saveSourceLang, saveTargetLang } = useLangPreferences();
@@ -18,7 +19,7 @@ export default function Home() {
 	const [chatForDelete, setChatForDelete] = useState<number>(0);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { translateMessage, translateLoading, error } = useTranslation();
-	const { chatSessions, activeSessionId, fetchChats, setActiveSessionId, chatSessionsLoading, newChatSession, deleteSession, renameChatSession } = useChatSessions();
+	const { chatSessions, activeSessionId, setActiveSessionId, chatSessionsLoading, newChatSession, deleteSession, renameChatSession } = useChatSessions();
 	const { messages, fetchMessages, addMessage, deleteMessagesForSession } = useMessages();
 
 	useEffect(() => {
@@ -62,6 +63,7 @@ export default function Home() {
 
 	return (
 		<>
+			<PrivacyConsent />
 			<AlertDialog
 				isOpen={isOpen}
 				leastDestructiveRef={cancelRef}

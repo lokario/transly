@@ -28,6 +28,7 @@ function SideBar({ activeSessionId, chatSessions, onSelectSession, handleSession
 					src="/assets/transly.svg"
 				/>
 				<Text
+					color="brand.accent"
 					fontSize="3xl"
 					fontFamily="Fredoka">
 					Transly

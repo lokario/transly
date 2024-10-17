@@ -1,8 +1,8 @@
 import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Flex, Grid, GridItem } from "@chakra-ui/react";
-import Messages from "../Messages/Messages";
 import Entry from "../Entry";
 import Topbar from "../TopBar";
 import { Message } from "@/app/page";
+import Messages from "../Messages";
 
 interface ChatBotProps {
 	error: string;
