@@ -1,4 +1,4 @@
-import { Box, Button, Heading, HStack, Image, Skeleton, SkeletonText, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Heading, HStack, Image, Skeleton, SkeletonText, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 import { RiAddLargeLine } from "react-icons/ri";
 import ChatSession from "../ChatSession";
 
@@ -26,7 +26,7 @@ function SideBar({ chatSessionsLoading, activeSessionId, chatSessions, onSelectS
 				<Image
 					width="48px"
 					alt="Logo"
-					src="/assets/transly.svg"
+					src={useColorModeValue("/assets/transly.svg", "/assets/transly_dark.svg")}
 				/>
 				<Text
 					color="brand.accent"

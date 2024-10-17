@@ -7,6 +7,7 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogOverlay,
+	Box,
 	Button,
 	Drawer,
 	DrawerBody,
@@ -18,6 +19,7 @@ import {
 	GridItem,
 	IconButton,
 	useBreakpointValue,
+	useColorModeValue,
 	useDisclosure,
 	useToast,
 } from "@chakra-ui/react";
@@ -31,6 +33,7 @@ import "./styles/globals.css";
 import { useLangPreferences } from "./hooks/useLangPreferences";
 import PrivacyConsent from "./components/PrivacyConsent";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import ColorModeToggle from "./components/ColorModeToggle";
 
 export default function Home() {
 	const { sourceLang, targetLang, saveSourceLang, saveTargetLang } = useLangPreferences();
@@ -42,6 +45,8 @@ export default function Home() {
 	const { translateMessage, error } = useTranslation();
 	const { chatSessions, activeSessionId, setActiveSessionId, chatSessionsLoading, newChatSession, deleteSession, renameChatSession } = useChatSessions();
 	const { messages, fetchMessages, addMessage, deleteMessagesForSession } = useMessages();
+
+	const bgColor = useColorModeValue("white", "brand.dark.bg");
 
 	useEffect(() => {
 		if (activeSessionId) fetchMessages(activeSessionId);
@@ -132,7 +137,7 @@ export default function Home() {
 				templateAreas={{ base: `"main"`, md: `"side main"` }}
 				gridTemplateRows={"1fr"}
 				gridTemplateColumns={{ base: "1fr", md: "auto 1fr" }}
-				bg="white"
+				bg={bgColor}
 				h="100vh">
 				{!isDesktop && (
 					<IconButton
@@ -162,6 +167,12 @@ export default function Home() {
 					<SidebarContent />
 				</GridItem>
 				<GridItem area={"main"}>
+					<Box
+						position="relative"
+						top={3}
+						right={4}>
+						<ColorModeToggle />
+					</Box>
 					<ChatBot
 						error={error}
 						messages={messages}

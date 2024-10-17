@@ -1,5 +1,5 @@
 import { ChatIcon } from "@chakra-ui/icons";
-import { Editable, EditableInput, EditablePreview, Flex, HStack, IconButton, Input, Menu, MenuButton, MenuItem, MenuList, useEditableControls } from "@chakra-ui/react";
+import { Editable, EditableInput, EditablePreview, Flex, HStack, IconButton, Input, Menu, MenuButton, MenuItem, MenuList, useEditableControls, useColorModeValue } from "@chakra-ui/react";
 import { FiEdit2 } from "react-icons/fi";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { SlOptions } from "react-icons/sl";
@@ -52,25 +52,26 @@ function ChatSession({ activeSessionId, session, onSelectSession, handleSessionD
 		<Editable
 			defaultValue={session.name}
 			fontSize={16}
-			color="gray.500"
+			color={session.id == activeSessionId ? useColorModeValue("gray.500", "gray.50") : useColorModeValue("gray.500", "gray.400")}
 			fontWeight="medium"
 			isPreviewFocusable={false}
 			onSubmit={newName => renameChatSession(session.id, newName)}>
 			<Flex
 				key={session.id}
 				p={3}
-				bg={session.id == activeSessionId ? "gray.100" : "white"}
+				bg={session.id == activeSessionId ? useColorModeValue("brand.highlight", "brand.dark.highlight") : "transparent"}
 				borderRadius="lg"
 				alignItems="center"
 				justifyContent="space-between"
 				cursor="pointer"
-				_hover={{ bg: "gray.100" }}
+				_hover={{ bg: useColorModeValue("brand.highlight", "brand.dark.highlight"), color: useColorModeValue("gray.500", "gray.50") }}
 				onClick={() => onSelectSession(session.id)}
 				role="group">
 				<HStack spacing={3}>
 					<ChatIcon
 						boxSize="20px"
-						color="gray.500"
+						color={session.id == activeSessionId ? useColorModeValue("gray.500", "gray.50") : useColorModeValue("gray.500", "gray.400")}
+						_groupHover={{ color: useColorModeValue("gray.500", "gray.50") }}
 					/>
 					<EditablePreview />
 					<Input as={EditableInput} />

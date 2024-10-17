@@ -1,7 +1,6 @@
-import { Box, Flex, HStack, IconButton, Select } from "@chakra-ui/react";
+import { Box, Flex, HStack, Select, useColorModeValue } from "@chakra-ui/react";
 import { TbSwitchHorizontal } from "react-icons/tb";
 import { languageOptions } from "./langOptions";
-import { HamburgerIcon } from "@chakra-ui/icons";
 
 interface TopBarProps {
 	targetLang: string;
@@ -14,14 +13,14 @@ function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarPr
 	return (
 		<Box>
 			<Flex
-				height={{ base: "4rem", md: "6rm" }}
+				height={{ base: "4rem", md: "6rem" }}
 				justifyContent="center"
 				alignItems={"center"}>
 				<HStack>
 					<Select
 						value={sourceLang}
 						onChange={e => onSourceLang(e.target.value)}
-						bg="whiteAlpha.600"
+						bg={useColorModeValue("brand.input", "brand.dark.input")}
 						sx={{
 							_focus: {
 								boxShadow: "none",
@@ -46,7 +45,7 @@ function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarPr
 					<Select
 						value={targetLang}
 						onChange={e => onTargetLang(e.target.value)}
-						bg="whiteAlpha.600"
+						bg={useColorModeValue("brand.input", "brand.dark.input")}
 						sx={{
 							_focus: {
 								boxShadow: "none",

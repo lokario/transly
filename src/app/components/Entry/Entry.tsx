@@ -1,4 +1,4 @@
-import { Box, IconButton, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Box, IconButton, Input, InputGroup, InputRightElement, useColorModeValue } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import { IoSend } from "react-icons/io5";
 
@@ -16,6 +16,8 @@ function Entry({ onMsgSend }: { onMsgSend: (msg: string) => void }) {
 		sendMessage();
 	};
 
+	const inputShadow = useColorModeValue("input", "inputDark");
+
 	return (
 		<Box
 			as="form"
@@ -28,13 +30,13 @@ function Entry({ onMsgSend }: { onMsgSend: (msg: string) => void }) {
 					placeholder="Send a new message to translate"
 					p="1.7rem"
 					pr="4rem"
-					bg="white"
+					bg={useColorModeValue("brand.input", "brand.dark.input")}
 					border={0}
-					boxShadow="deep"
+					boxShadow={inputShadow}
 					size="lg"
 					sx={{
 						_focus: {
-							boxShadow: "deep",
+							boxShadow: inputShadow,
 						},
 					}}
 				/>

@@ -1,4 +1,4 @@
-import { Avatar, Flex } from "@chakra-ui/react";
+import { Avatar, Flex, useColorModeValue } from "@chakra-ui/react";
 import { LuLanguages } from "react-icons/lu";
 
 interface MessageProps {
@@ -7,6 +7,8 @@ interface MessageProps {
 }
 
 function Message({ text, isOwn }: MessageProps) {
+	const msgShadow = useColorModeValue("input", "inputDark");
+
 	return (
 		<Flex
 			w="100%"
@@ -21,12 +23,12 @@ function Message({ text, isOwn }: MessageProps) {
 			)}
 
 			<Flex
-				bg={isOwn ? "brand.accent" : "white"}
+				bg={isOwn ? "brand.accent" : useColorModeValue("brand.input", "brand.dark.input")}
 				alignItems="center"
 				borderRadius="100"
-				boxShadow={isOwn ? "msgOwn" : "msgOther"}
+				boxShadow={isOwn ? "msgOwn" : msgShadow}
 				p="0rem 1.25rem"
-				color={isOwn ? "white" : "black"}>
+				color={isOwn ? "white" : useColorModeValue("black", "white")}>
 				{text}
 			</Flex>
 

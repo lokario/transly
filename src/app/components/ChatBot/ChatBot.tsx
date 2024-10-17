@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Flex, Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
 import Entry from "../Entry";
 import Topbar from "../TopBar";
 import { Message } from "@/app/page";
@@ -15,6 +15,8 @@ interface ChatBotProps {
 }
 
 function ChatBot({ onMsgSend, error, targetLang, sourceLang, messages, onSourceLang, onTargetLang }: ChatBotProps) {
+	const bgColor = useColorModeValue("brand.bg", "brand.dark.bg2");
+
 	return (
 		<Grid
 			templateAreas={`"top" "messages"`}
@@ -30,7 +32,7 @@ function ChatBot({ onMsgSend, error, targetLang, sourceLang, messages, onSourceL
 			</GridItem>
 			<GridItem area={"messages"}>
 				<Flex
-					bg="brand.bg"
+					bg={bgColor}
 					borderRadius={20}
 					mr={{ base: 0, md: "2rem" }}
 					padding="2rem"
