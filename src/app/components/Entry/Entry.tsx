@@ -6,10 +6,14 @@ function Entry({ onMsgSend }: { onMsgSend: (msg: string) => void }) {
 	const formRef = useRef<HTMLFormElement>(null);
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const sendMessage = () => {
 		if (inputRef.current) onMsgSend(inputRef.current.value);
 		formRef.current?.reset();
+	};
+
+	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		sendMessage();
 	};
 
 	return (
@@ -42,6 +46,7 @@ function Entry({ onMsgSend }: { onMsgSend: (msg: string) => void }) {
 						variant="solid"
 						fontSize="20px"
 						aria-label="Search database"
+						onClick={sendMessage}
 						icon={<IoSend />}
 					/>
 				</InputRightElement>
