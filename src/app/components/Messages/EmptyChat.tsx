@@ -10,7 +10,7 @@ function EmptyChatState() {
 			h="100%"
 			align="center">
 			<Box
-				w="30%"
+				w={{ base: "100%", md: "30%" }}
 				p={5}
 				bg="white"
 				boxShadow="sm"
@@ -66,7 +66,8 @@ function EmptyChatState() {
 				p={5}
 				bg="white"
 				boxShadow="sm"
-				borderRadius="md">
+				borderRadius="md"
+				display={{ base: "none", md: "block" }}>
 				<VStack
 					spacing={4}
 					align="start">
@@ -111,7 +112,8 @@ function EmptyChatState() {
 				p={5}
 				bg="white"
 				boxShadow="sm"
-				borderRadius="md">
+				borderRadius="md"
+				display={{ base: "none", md: "block" }}>
 				<VStack
 					spacing={4}
 					align="start">

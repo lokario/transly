@@ -1,6 +1,26 @@
 "use client";
 
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Grid, GridItem, useDisclosure, useToast } from "@chakra-ui/react";
+import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
+	Button,
+	Drawer,
+	DrawerBody,
+	DrawerCloseButton,
+	DrawerContent,
+	DrawerHeader,
+	DrawerOverlay,
+	Grid,
+	GridItem,
+	IconButton,
+	useBreakpointValue,
+	useDisclosure,
+	useToast,
+} from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import ChatBot from "./components/ChatBot";
 import SideBar from "./components/SideBar";
@@ -10,6 +30,7 @@ import { useTranslation } from "./hooks/useTranslation";
 import "./styles/globals.css";
 import { useLangPreferences } from "./hooks/useLangPreferences";
 import PrivacyConsent from "./components/PrivacyConsent";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
 export default function Home() {
 	const { sourceLang, targetLang, saveSourceLang, saveTargetLang } = useLangPreferences();
@@ -18,7 +39,7 @@ export default function Home() {
 	const cancelRef = useRef(null);
 	const [chatForDelete, setChatForDelete] = useState<number>(0);
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const { translateMessage, translateLoading, error } = useTranslation();
+	const { translateMessage, error } = useTranslation();
 	const { chatSessions, activeSessionId, setActiveSessionId, chatSessionsLoading, newChatSession, deleteSession, renameChatSession } = useChatSessions();
 	const { messages, fetchMessages, addMessage, deleteMessagesForSession } = useMessages();
 
@@ -58,8 +79,21 @@ export default function Home() {
 	};
 
 	const handleSourceLang = (lang: string) => saveSourceLang(lang);
-
 	const handleTargetLang = (lang: string) => saveTargetLang(lang);
+	const [isSideBarOpen, setSideBarOpen] = useState(false);
+	const isDesktop = useBreakpointValue({ base: false, md: true });
+
+	const SidebarContent = () => (
+		<SideBar
+			chatSessionsLoading={chatSessionsLoading}
+			renameChatSession={renameChatSession}
+			handleSessionDelete={handleSessionDelete}
+			newChatSession={newChatSession}
+			activeSessionId={activeSessionId}
+			onSelectSession={id => setActiveSessionId(id)}
+			chatSessions={chatSessions}
+		/>
+	);
 
 	return (
 		<>
@@ -95,21 +129,37 @@ export default function Home() {
 				</AlertDialogOverlay>
 			</AlertDialog>
 			<Grid
-				templateAreas={`"side main"`}
+				templateAreas={{ base: `"main"`, md: `"side main"` }}
 				gridTemplateRows={"1fr"}
-				gridTemplateColumns={"auto 1fr"}
+				gridTemplateColumns={{ base: "1fr", md: "auto 1fr" }}
 				bg="white"
 				h="100vh">
-				<GridItem area={"side"}>
-					<SideBar
-						chatSessionsLoading={chatSessionsLoading}
-						renameChatSession={renameChatSession}
-						handleSessionDelete={handleSessionDelete}
-						newChatSession={newChatSession}
-						activeSessionId={activeSessionId}
-						onSelectSession={id => setActiveSessionId(id)}
-						chatSessions={chatSessions}
+				{!isDesktop && (
+					<IconButton
+						aria-label="Toggle Sidebar"
+						icon={<HamburgerIcon />}
+						position="absolute"
+						top={3}
+						left={4}
+						zIndex={2}
+						onClick={() => setSideBarOpen(true)}
 					/>
+				)}
+				<Drawer
+					placement="left"
+					onClose={() => setSideBarOpen(false)}
+					isOpen={isSideBarOpen}>
+					<DrawerOverlay />
+					<DrawerContent maxW="21.5rem">
+						<DrawerBody p={0}>
+							<SidebarContent />
+						</DrawerBody>
+					</DrawerContent>
+				</Drawer>
+				<GridItem
+					display={isDesktop ? "block" : "none"}
+					area={"side"}>
+					<SidebarContent />
 				</GridItem>
 				<GridItem area={"main"}>
 					<ChatBot

@@ -24,10 +24,11 @@ function ChatSession({ activeSessionId, session, onSelectSession, handleSessionD
 						aria-label="Options"
 						icon={<SlOptions />}
 						variant="ghost"
-						onClick={e => e.stopPropagation()} // Prevent onClick from triggering select session
+						onClick={e => e.stopPropagation()}
+						opacity={{ base: "1", md: "0" }}
+						_groupHover={{ opacity: "1" }}
 					/>
 					<MenuList>
-						{/* Trigger edit mode using getEditButtonProps */}
 						<MenuItem
 							icon={<FiEdit2 />}
 							{...getEditButtonProps()}>
@@ -64,7 +65,8 @@ function ChatSession({ activeSessionId, session, onSelectSession, handleSessionD
 				justifyContent="space-between"
 				cursor="pointer"
 				_hover={{ bg: "gray.100" }}
-				onClick={() => onSelectSession(session.id)}>
+				onClick={() => onSelectSession(session.id)}
+				role="group">
 				<HStack spacing={3}>
 					<ChatIcon
 						boxSize="20px"

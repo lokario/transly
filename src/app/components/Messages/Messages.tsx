@@ -15,7 +15,7 @@ function Messages({ messages }: { messages: IMessage[] }) {
 
 	return (
 		<VStack
-			p="2rem 1rem"
+			p={{ base: 0, md: "2rem 1rem" }}
 			h="100%">
 			{!messages.length && <EmptyChatState />}
 			{messages.map((msg, index) => (

@@ -32,10 +32,10 @@ function ChatBot({ onMsgSend, error, targetLang, sourceLang, messages, onSourceL
 				<Flex
 					bg="brand.bg"
 					borderRadius={20}
-					mr="2rem"
+					mr={{ base: 0, md: "2rem" }}
 					padding="2rem"
 					direction="column"
-					height="calc(100vh - 8rem)">
+					height={{ base: "calc(100vh - 4rem)", md: "calc(100vh - 8rem)" }}>
 					{error && (
 						<Alert
 							status="error"

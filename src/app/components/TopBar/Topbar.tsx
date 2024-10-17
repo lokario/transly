@@ -1,6 +1,7 @@
-import { Box, Flex, HStack, Select } from "@chakra-ui/react";
+import { Box, Flex, HStack, IconButton, Select } from "@chakra-ui/react";
 import { TbSwitchHorizontal } from "react-icons/tb";
 import { languageOptions } from "./langOptions";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
 interface TopBarProps {
 	targetLang: string;
@@ -13,7 +14,7 @@ function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarPr
 	return (
 		<Box>
 			<Flex
-				height="6rem"
+				height={{ base: "4rem", md: "6rm" }}
 				justifyContent="center"
 				alignItems={"center"}>
 				<HStack>
@@ -27,6 +28,7 @@ function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarPr
 								borderColor: "gray.300",
 							},
 						}}
+						width={{ base: "7rem", md: "auto" }}
 						placeholder="Source Language">
 						<option value="">AutoDetect Language</option>
 
@@ -51,6 +53,7 @@ function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarPr
 								borderColor: "gray.300",
 							},
 						}}
+						width={{ base: "7rem", md: "auto" }}
 						placeholder="Target Language">
 						{languageOptions.map(lang => (
 							<option
