@@ -32,9 +32,8 @@ function ChatBot({ onMsgSend, error, targetLang, sourceLang, messages, onSourceL
 				<Flex
 					bg="brand.bg"
 					borderRadius={20}
-					margin="2rem"
-					mt={0}
-					padding="1rem 2rem"
+					mr="2rem"
+					padding="2rem"
 					direction="column"
 					height="calc(100vh - 8rem)">
 					{error && (

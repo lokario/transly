@@ -17,7 +17,7 @@ function Messages({ messages }: { messages: IMessage[] }) {
 			{messages.map((msg, index) => (
 				<Message
 					key={index}
-					text={msg.msg}
+					text={msg.text}
 					isOwn={msg.isOwn}
 				/>
 			))}

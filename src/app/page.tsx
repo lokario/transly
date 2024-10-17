@@ -1,31 +1,36 @@
 "use client";
 
-import { Grid, GridItem, useToast } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Grid, GridItem, useDisclosure, useToast } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import ChatBot from "./components/ChatBot";
 import SideBar from "./components/SideBar";
 import { useTranslation } from "./hooks/useTranslation";
+import { useChatSessions } from "./hooks/useChatSessions";
 import "./styles/globals.css";
-
-export interface Message {
-	isOwn: boolean;
-	msg: string;
-}
+import { useMessages } from "./hooks/useMessages";
 
 export default function Home() {
 	const [sourceLang, setSourceLang] = useState<string>("en");
 	const [targetLang, setTargetLang] = useState<string>("es");
-	const [messages, setMessages] = useState<Message[]>([]);
 
 	const toast = useToast();
-	const { translateMessage, loading, error } = useTranslation();
+	const cancelRef = useRef(null);
+	const [chatForDelete, setChatForDelete] = useState<number>(0);
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { translateMessage, translateLoading, error } = useTranslation();
+	const { chatSessions, activeSessionId, fetchChats, setActiveSessionId, chatSessionsLoading, newChatSession, deleteSession, renameChatSession } = useChatSessions();
+	const { messages, fetchMessages, addMessage, deleteMessagesForSession } = useMessages();
+
+	useEffect(() => {
+		if (activeSessionId) fetchMessages(activeSessionId);
+	}, [activeSessionId]);
 
 	const handleSendMessage = async (msgText: string) => {
 		const { translatedText, error: translationError, isPersistent } = await translateMessage(msgText, sourceLang, targetLang);
 
-		if (translatedText) {
-			setMessages(prevMessages => [...prevMessages, { isOwn: true, msg: msgText }]);
-			setMessages(prevMessages => [...prevMessages, { isOwn: false, msg: translatedText }]);
+		if (translatedText && activeSessionId) {
+			addMessage(activeSessionId, msgText, true);
+			addMessage(activeSessionId, translatedText, false);
 		} else if (translationError && !isPersistent) {
 			toast({
 				title: "Translation Error",
@@ -38,33 +43,83 @@ export default function Home() {
 		}
 	};
 
+	const confirmSessionDelete = () => {
+		deleteMessagesForSession(chatForDelete);
+		deleteSession(chatForDelete);
+		setChatForDelete(0);
+		onClose();
+	};
+
+	const handleSessionDelete = (sessionId: number) => {
+		setChatForDelete(sessionId);
+
+		onOpen();
+	};
+
 	const handleSourceLang = (lang: string) => setSourceLang(lang);
 
 	const handleTargetLang = (lang: string) => setTargetLang(lang);
 
 	return (
-		<Grid
-			templateAreas={`"side main"`}
-			gridTemplateRows={"1fr"}
-			gridTemplateColumns={"260px 1fr"}
-			bg="white"
-			h="100vh">
-			<GridItem
-				bg="pink.300"
-				area={"side"}>
-				<SideBar />
-			</GridItem>
-			<GridItem area={"main"}>
-				<ChatBot
-					error={error}
-					messages={messages}
-					sourceLang={sourceLang}
-					targetLang={targetLang}
-					onSourceLang={handleSourceLang}
-					onTargetLang={handleTargetLang}
-					onMsgSend={handleSendMessage}
-				/>
-			</GridItem>
-		</Grid>
+		<>
+			<AlertDialog
+				isOpen={isOpen}
+				leastDestructiveRef={cancelRef}
+				onClose={onClose}>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader
+							fontSize="lg"
+							fontWeight="bold">
+							Delete Chat
+						</AlertDialogHeader>
+
+						<AlertDialogBody>Are you sure? You can't undo this action afterwards.</AlertDialogBody>
+
+						<AlertDialogFooter>
+							<Button
+								ref={cancelRef}
+								onClick={onClose}>
+								Cancel
+							</Button>
+							<Button
+								colorScheme="red"
+								onClick={confirmSessionDelete}
+								ml={3}>
+								Delete
+							</Button>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
+			<Grid
+				templateAreas={`"side main"`}
+				gridTemplateRows={"1fr"}
+				gridTemplateColumns={"auto 1fr"}
+				bg="white"
+				h="100vh">
+				<GridItem area={"side"}>
+					<SideBar
+						renameChatSession={renameChatSession}
+						handleSessionDelete={handleSessionDelete}
+						newChatSession={newChatSession}
+						activeSessionId={activeSessionId}
+						onSelectSession={id => setActiveSessionId(id)}
+						chatSessions={chatSessions}
+					/>
+				</GridItem>
+				<GridItem area={"main"}>
+					<ChatBot
+						error={error}
+						messages={messages}
+						sourceLang={sourceLang}
+						targetLang={targetLang}
+						onSourceLang={handleSourceLang}
+						onTargetLang={handleTargetLang}
+						onMsgSend={handleSendMessage}
+					/>
+				</GridItem>
+			</Grid>
+		</>
 	);
 }
