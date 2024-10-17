@@ -1,7 +1,6 @@
-import { Box, Divider, Flex, HStack, Select } from "@chakra-ui/react";
+import { Box, Flex, HStack, Select } from "@chakra-ui/react";
 import { TbSwitchHorizontal } from "react-icons/tb";
 import { languageOptions } from "./langOptions";
-import { useRef } from "react";
 
 interface TopBarProps {
 	targetLang: string;
@@ -11,9 +10,6 @@ interface TopBarProps {
 }
 
 function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarProps) {
-	const sourceRef = useRef<HTMLInputElement>(null);
-	const targetRef = useRef<HTMLInputElement>(null);
-
 	return (
 		<Box>
 			<Flex
@@ -32,7 +28,7 @@ function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarPr
 							},
 						}}
 						placeholder="Source Language">
-						<option value="auto">AutoDetect Language</option>
+						<option value="">AutoDetect Language</option>
 
 						{languageOptions.map(lang => (
 							<option

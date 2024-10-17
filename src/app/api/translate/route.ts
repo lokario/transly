@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
 	try {
 		const { text, sourceLang, targetLang } = await req.json();
 
-		if (!text || !sourceLang || !targetLang) return NextResponse.json({ error: "Invalid request payload." }, { status: 400 });
+		if (!text || !targetLang) return NextResponse.json({ error: "Invalid request payload." }, { status: 400 });
 
 		const cacheKey = `${sourceLang}:${targetLang}:${text}`;
 		const cachedTranslation = await redis.get(cacheKey);
