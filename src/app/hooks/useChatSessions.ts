@@ -21,7 +21,7 @@ export const useChatSessions = () => {
 
 			if (!sessions.length) await addChatSession(db);
 			else {
-				setChatSessions(sessions);
+				setChatSessions(sessions.reverse());
 				setActiveSessionId(sessions[0].id);
 			}
 		} catch (error) {
@@ -78,6 +78,7 @@ export const useChatSessions = () => {
 	};
 
 	const addChatSession = async (db: IDBPDatabase<unknown>) => {
+		debugger;
 		const now = new Date();
 		const timeString = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true });
 		const newSession = {
@@ -88,15 +89,9 @@ export const useChatSessions = () => {
 		await txAdd.store.add(newSession);
 		await txAdd.done;
 
-		const updatedSessions = await fetchAllSessions(db);
-		setChatSessions(updatedSessions);
+		const zz = [newSession, ...chatSessions];
+		setChatSessions(zz);
 		setActiveSessionId(newSession.id);
-	};
-
-	const fetchAllSessions = async (db: IDBPDatabase<unknown>) => {
-		const tx = db.transaction("chatSessions", "readonly");
-		const store = tx.objectStore("chatSessions");
-		return await store.getAll();
 	};
 
 	useEffect(() => {

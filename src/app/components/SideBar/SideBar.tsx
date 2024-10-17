@@ -14,6 +14,7 @@ interface SideBarProps {
 function SideBar({ activeSessionId, chatSessions, onSelectSession, handleSessionDelete, newChatSession, renameChatSession }: SideBarProps) {
 	return (
 		<Box
+			h="100vh"
 			w="320px"
 			p={8}
 			display="flex"
@@ -49,7 +50,6 @@ function SideBar({ activeSessionId, chatSessions, onSelectSession, handleSession
 				align="stretch"
 				spacing={3}
 				overflowY="auto"
-				flexDirection="column-reverse"
 				flex={1}>
 				{!chatSessions.length && (
 					<Text
@@ -58,9 +58,9 @@ function SideBar({ activeSessionId, chatSessions, onSelectSession, handleSession
 						Start a new conversation to get started.
 					</Text>
 				)}
-				{chatSessions.map((session, index) => (
+				{chatSessions.map(session => (
 					<ChatSession
-						key={index}
+						key={session.id}
 						activeSessionId={activeSessionId}
 						session={session}
 						onSelectSession={onSelectSession}
