@@ -15,7 +15,7 @@ function SideBar({ activeSessionId, chatSessions, onSelectSession, handleSession
 	return (
 		<Box
 			h="100vh"
-			w="320px"
+			w="340px"
 			p={8}
 			display="flex"
 			flexDirection="column">
@@ -50,6 +50,8 @@ function SideBar({ activeSessionId, chatSessions, onSelectSession, handleSession
 				align="stretch"
 				spacing={3}
 				overflowY="auto"
+				padding="0 10px"
+				className="neat-scroll"
 				flex={1}>
 				{!chatSessions.length && (
 					<Text

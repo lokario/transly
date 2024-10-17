@@ -1,7 +1,7 @@
-import { VStack } from "@chakra-ui/react";
-import Message from "../Message";
 import { Message as IMessage } from "@/app/page";
+import { VStack } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
+import Message from "../Message";
 import EmptyChatState from "./EmptyChat";
 
 function Messages({ messages }: { messages: IMessage[] }) {

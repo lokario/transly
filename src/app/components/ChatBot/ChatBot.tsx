@@ -49,7 +49,8 @@ function ChatBot({ onMsgSend, error, targetLang, sourceLang, messages, onSourceL
 					<Box
 						flex="1"
 						overflowY="auto"
-						paddingRight="1rem">
+						paddingRight="1rem"
+						className="neat-scroll">
 						<Messages messages={messages} />
 					</Box>
 					<Entry onMsgSend={onMsgSend} />
