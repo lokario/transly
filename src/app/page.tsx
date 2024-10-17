@@ -102,6 +102,7 @@ export default function Home() {
 				h="100vh">
 				<GridItem area={"side"}>
 					<SideBar
+						chatSessionsLoading={chatSessionsLoading}
 						renameChatSession={renameChatSession}
 						handleSessionDelete={handleSessionDelete}
 						newChatSession={newChatSession}

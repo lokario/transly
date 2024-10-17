@@ -10,7 +10,7 @@ interface ChatSession {
 export const useChatSessions = () => {
 	const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
 	const [activeSessionId, setActiveSessionId] = useState<number | null>(null);
-	const [loading, setLoading] = useState(true);
+	const [chatSessionsLoading, setLoading] = useState(true);
 
 	const initializeChats = async () => {
 		try {
@@ -105,6 +105,6 @@ export const useChatSessions = () => {
 		newChatSession,
 		deleteSession,
 		renameChatSession,
-		loading,
+		chatSessionsLoading,
 	};
 };
