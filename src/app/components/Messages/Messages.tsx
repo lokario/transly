@@ -2,6 +2,7 @@ import { VStack } from "@chakra-ui/react";
 import Message from "../Message";
 import { Message as IMessage } from "@/app/page";
 import { useEffect, useRef } from "react";
+import EmptyChatState from "./EmptyChat";
 
 function Messages({ messages }: { messages: IMessage[] }) {
 	const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -13,7 +14,10 @@ function Messages({ messages }: { messages: IMessage[] }) {
 	}, [messages]);
 
 	return (
-		<VStack p="2rem 1rem">
+		<VStack
+			p="2rem 1rem"
+			h="100%">
+			{!messages.length && <EmptyChatState />}
 			{messages.map((msg, index) => (
 				<Message
 					key={index}

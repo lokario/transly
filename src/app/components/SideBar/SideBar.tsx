@@ -51,6 +51,13 @@ function SideBar({ activeSessionId, chatSessions, onSelectSession, handleSession
 				overflowY="auto"
 				flexDirection="column-reverse"
 				flex={1}>
+				{!chatSessions.length && (
+					<Text
+						fontSize="md"
+						color="gray.400">
+						Start a new conversation to get started.
+					</Text>
+				)}
 				{chatSessions.map((session, index) => (
 					<ChatSession
 						key={index}
