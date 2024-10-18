@@ -8,10 +8,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<head>
-				<title>Translation Chatbot</title>
+				<title>Transly</title>
 				<meta
 					name="description"
-					content="A chatbot that provides translations"
+					content="Transly, a chatbot that provides translations"
 				/>
 			</head>
 			<body>
