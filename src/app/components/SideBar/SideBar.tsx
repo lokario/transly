@@ -53,7 +53,7 @@ function SideBar({ chatSessionsLoading, activeSessionId, chatSessions, onSelectS
 				spacing={3}
 				overflowY="auto"
 				padding="0 10px"
-				className="neat-scroll"
+				className={useColorModeValue("neat-scroll", "neat-scroll dark")}
 				flex={1}>
 				{chatSessionsLoading ? (
 					<>

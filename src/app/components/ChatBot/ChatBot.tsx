@@ -52,7 +52,7 @@ function ChatBot({ onMsgSend, error, targetLang, sourceLang, messages, onSourceL
 						flex="1"
 						overflowY="auto"
 						paddingRight="1rem"
-						className="neat-scroll">
+						className={useColorModeValue("neat-scroll", "neat-scroll dark")}>
 						<Messages messages={messages} />
 					</Box>
 					<Entry onMsgSend={onMsgSend} />

@@ -18,3 +18,8 @@
   background-color: rgba(40, 55, 75, 0.15);
   border-radius: 20px;
 }
+
+.neat-scroll.dark::-webkit-scrollbar-thumb {
+  background-color: rgba(204, 219, 237, 0.15);
+  border-radius: 20px;
+}

@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, VStack, useColorModeValue } from "@chakra-ui/react";
 import { BsTranslate } from "react-icons/bs";
 import { FaCog, FaExclamationTriangle } from "react-icons/fa";
 
@@ -12,7 +12,7 @@ function EmptyChatState() {
 			<Box
 				w={{ base: "100%", md: "30%" }}
 				p={5}
-				bg="white"
+				bg={useColorModeValue("brand.input", "brand.dark.input")}
 				boxShadow="sm"
 				borderRadius="md">
 				<VStack
@@ -33,28 +33,28 @@ function EmptyChatState() {
 					<Text
 						w="100%"
 						padding={2}
-						bg="gray.50"
+						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
 						borderRadius={6}>
 						Translate "Hello" to Russian.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg="gray.50"
+						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
 						borderRadius={6}>
 						Translate "Good morning" to French.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg="gray.50"
+						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
 						borderRadius={6}>
 						How do you say "Thank you" in German?
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg="gray.50"
+						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
 						borderRadius={6}>
 						Translate "Happy Birthday" to Spanish.
 					</Text>
@@ -64,7 +64,7 @@ function EmptyChatState() {
 			<Box
 				w="30%"
 				p={5}
-				bg="white"
+				bg={useColorModeValue("brand.input", "brand.dark.input")}
 				boxShadow="sm"
 				borderRadius="md"
 				display={{ base: "none", md: "block" }}>
@@ -86,21 +86,21 @@ function EmptyChatState() {
 					<Text
 						w="100%"
 						padding={2}
-						bg="gray.50"
+						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
 						borderRadius={6}>
 						Translates between 50+ languages in real-time.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg="gray.50"
+						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
 						borderRadius={6}>
 						Detects the source language automatically.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg="gray.50"
+						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
 						borderRadius={6}>
 						Supports informal and formal translation modes.
 					</Text>
@@ -110,7 +110,7 @@ function EmptyChatState() {
 			<Box
 				w="30%"
 				p={5}
-				bg="white"
+				bg={useColorModeValue("brand.input", "brand.dark.input")}
 				boxShadow="sm"
 				borderRadius="md"
 				display={{ base: "none", md: "block" }}>
@@ -132,21 +132,21 @@ function EmptyChatState() {
 					<Text
 						w="100%"
 						padding={2}
-						bg="gray.50"
+						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
 						borderRadius={6}>
 						May produce incorrect translations for nuanced phrases.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg="gray.50"
+						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
 						borderRadius={6}>
 						Cannot hold context across multiple messages.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg="gray.50"
+						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
 						borderRadius={6}>
 						Limited to basic conversational translation.
 					</Text>

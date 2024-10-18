@@ -155,9 +155,17 @@ export default function Home() {
 					onClose={() => setSideBarOpen(false)}
 					isOpen={isSideBarOpen}>
 					<DrawerOverlay />
-					<DrawerContent maxW="21.5rem">
+					<DrawerContent
+						bg={bgColor}
+						maxW="21.5rem">
 						<DrawerBody p={0}>
 							<SidebarContent />
+							<Box
+								position="absolute"
+								top={1}
+								right={1}>
+								<ColorModeToggle />
+							</Box>
 						</DrawerBody>
 					</DrawerContent>
 				</Drawer>
@@ -167,12 +175,14 @@ export default function Home() {
 					<SidebarContent />
 				</GridItem>
 				<GridItem area={"main"}>
-					<Box
-						position="relative"
-						top={3}
-						right={4}>
-						<ColorModeToggle />
-					</Box>
+					{isDesktop && (
+						<Box
+							position="relative"
+							top={3}
+							right={4}>
+							<ColorModeToggle />
+						</Box>
+					)}
 					<ChatBot
 						error={error}
 						messages={messages}
