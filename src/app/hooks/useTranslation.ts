@@ -24,7 +24,7 @@ export const useTranslation = () => {
 			if (response.status !== 200) throw new Error(`API responded with status ${response.status}`);
 
 			return { translatedText: response.data.translatedText, error: "", isPersistent: false };
-		} catch (err: any) {
+		} catch (err: unknown) {
 			const { errorMessage, isPersistent } = handleTranslationError(err);
 
 			if (isPersistent) setError(errorMessage);
@@ -52,7 +52,7 @@ export const useTranslation = () => {
 		return await axios.post("/api/translate", { text, sourceLang, targetLang }, { timeout: 5000, signal });
 	};
 
-	const handleTranslationError = (err: any) => {
+	const handleTranslationError = (err: unknown) => {
 		let errorMessage = "Translation failed. Please try again.";
 		let isPersistent = false;
 

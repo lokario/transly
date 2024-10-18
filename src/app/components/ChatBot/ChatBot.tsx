@@ -1,8 +1,8 @@
 import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Flex, Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
 import Entry from "../Entry";
 import Topbar from "../TopBar";
-import { Message } from "@/app/page";
 import Messages from "../Messages";
+import { Message } from "../../hooks/useMessages";
 
 export interface ChatBotProps {
 	error: string;
@@ -16,6 +16,7 @@ export interface ChatBotProps {
 
 function ChatBot({ onMsgSend, error, targetLang, sourceLang, messages, onSourceLang, onTargetLang }: ChatBotProps) {
 	const bgColor = useColorModeValue("brand.bg", "brand.dark.bg2");
+	const scrollStyle = useColorModeValue("neat-scroll", "neat-scroll dark");
 
 	return (
 		<Grid
@@ -52,7 +53,7 @@ function ChatBot({ onMsgSend, error, targetLang, sourceLang, messages, onSourceL
 						flex="1"
 						overflowY="auto"
 						paddingRight="1rem"
-						className={useColorModeValue("neat-scroll", "neat-scroll dark")}>
+						className={scrollStyle}>
 						<Messages messages={messages} />
 					</Box>
 					<Entry onMsgSend={onMsgSend} />

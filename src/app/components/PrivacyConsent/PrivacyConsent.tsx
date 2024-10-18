@@ -1,14 +1,11 @@
-import { useState } from "react";
 import { Box, Button, Text } from "@chakra-ui/react";
 
-function PrivacyConsent() {
-	const [isVisible, setIsVisible] = useState(!localStorage.getItem("privacyConsent"));
+interface PrivacyConsent {
+	isVisible: boolean;
+	handleAccept: () => void;
+}
 
-	const handleAccept = () => {
-		localStorage.setItem("privacyConsent", "accepted");
-		setIsVisible(false);
-	};
-
+function PrivacyConsent({ isVisible, handleAccept }: PrivacyConsent) {
 	if (!isVisible) return null;
 
 	return (

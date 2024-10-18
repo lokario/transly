@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import redis from "@/lib/redis";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
+import redis from "../../../lib/redis";
 
 export async function POST(req: NextRequest) {
 	try {
@@ -31,8 +31,12 @@ export async function POST(req: NextRequest) {
 		await redis.set(cacheKey, translatedText, { ex: 60 * 60 * 24 });
 
 		return NextResponse.json({ translatedText });
-	} catch (err: any) {
-		console.error("Translation error:", err.message || err);
+	} catch (err: unknown) {
+		if (err instanceof Error) {
+			console.error("Translation error:", err.message || err);
+		} else {
+			console.error("An unexpected error occurred");
+		}
 
 		if (axios.isAxiosError(err)) {
 			if (err.response) {
@@ -52,7 +56,7 @@ export async function POST(req: NextRequest) {
 	}
 }
 
-export const retryTranslation = async (apiUrl: string, payload: any, retries = 3): Promise<string | null> => {
+const retryTranslation = async (apiUrl: string, payload: AxiosRequestConfig, retries = 3): Promise<string | null> => {
 	let attempt = 0;
 
 	while (attempt < retries) {

@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from "react";
-import { openDB, IDBPDatabase } from "idb";
-import { openDatabase } from "@/lib/chatbotDB";
+import { IDBPDatabase } from "idb";
+import { useEffect, useState } from "react";
+import { openDatabase } from "../../lib/chatbotDB";
 
 interface ChatSession {
 	id: number;
@@ -9,7 +9,7 @@ interface ChatSession {
 
 export const useChatSessions = () => {
 	const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
-	const [activeSessionId, setActiveSessionId] = useState<number | null>(null);
+	const [activeSessionId, setActiveSessionId] = useState<number>(0);
 	const [chatSessionsLoading, setLoading] = useState(true);
 
 	const initializeChats = async () => {
@@ -70,7 +70,7 @@ export const useChatSessions = () => {
 
 			if (sessionId === activeSessionId) {
 				const remainingSessions = chatSessions.filter(session => session.id !== sessionId);
-				setActiveSessionId(remainingSessions.length > 0 ? remainingSessions[0].id : null);
+				setActiveSessionId(remainingSessions.length > 0 ? remainingSessions[0].id : 0);
 			}
 		} catch (error) {
 			console.error("Error deleting chat session:", error);

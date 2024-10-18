@@ -3,6 +3,8 @@ import { BsTranslate } from "react-icons/bs";
 import { FaCog, FaExclamationTriangle } from "react-icons/fa";
 
 function EmptyChatState() {
+	const fgColor = useColorModeValue("gray.50", "whiteAlpha.50");
+	const bgColor = useColorModeValue("brand.input", "brand.dark.input");
 	return (
 		<Flex
 			justify="space-around"
@@ -12,7 +14,7 @@ function EmptyChatState() {
 			<Box
 				w={{ base: "100%", md: "30%" }}
 				p={5}
-				bg={useColorModeValue("brand.input", "brand.dark.input")}
+				bg={bgColor}
 				boxShadow="sm"
 				borderRadius="md">
 				<VStack
@@ -33,30 +35,30 @@ function EmptyChatState() {
 					<Text
 						w="100%"
 						padding={2}
-						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
+						bg={fgColor}
 						borderRadius={6}>
-						Translate "Hello" to Russian.
+						Translate &quot;Hello&quot; to Russian.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
+						bg={fgColor}
 						borderRadius={6}>
-						Translate "Good morning" to French.
+						Translate &quot;Good morning&quot; to French.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
+						bg={fgColor}
 						borderRadius={6}>
-						How do you say "Thank you" in German?
+						How do you say &quot;Thank you&quot; in German?
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
+						bg={fgColor}
 						borderRadius={6}>
-						Translate "Happy Birthday" to Spanish.
+						Translate &quot;Happy Birthday&quot; to Spanish.
 					</Text>
 				</VStack>
 			</Box>
@@ -64,7 +66,7 @@ function EmptyChatState() {
 			<Box
 				w="30%"
 				p={5}
-				bg={useColorModeValue("brand.input", "brand.dark.input")}
+				bg={bgColor}
 				boxShadow="sm"
 				borderRadius="md"
 				display={{ base: "none", md: "block" }}>
@@ -86,21 +88,21 @@ function EmptyChatState() {
 					<Text
 						w="100%"
 						padding={2}
-						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
+						bg={fgColor}
 						borderRadius={6}>
 						Translates between 50+ languages in real-time.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
+						bg={fgColor}
 						borderRadius={6}>
 						Detects the source language automatically.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
+						bg={fgColor}
 						borderRadius={6}>
 						Supports informal and formal translation modes.
 					</Text>
@@ -110,7 +112,7 @@ function EmptyChatState() {
 			<Box
 				w="30%"
 				p={5}
-				bg={useColorModeValue("brand.input", "brand.dark.input")}
+				bg={bgColor}
 				boxShadow="sm"
 				borderRadius="md"
 				display={{ base: "none", md: "block" }}>
@@ -132,21 +134,21 @@ function EmptyChatState() {
 					<Text
 						w="100%"
 						padding={2}
-						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
+						bg={fgColor}
 						borderRadius={6}>
 						May produce incorrect translations for nuanced phrases.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
+						bg={fgColor}
 						borderRadius={6}>
 						Cannot hold context across multiple messages.
 					</Text>
 					<Text
 						w="100%"
 						padding={2}
-						bg={useColorModeValue("gray.50", "whiteAlpha.50")}
+						bg={fgColor}
 						borderRadius={6}>
 						Limited to basic conversational translation.
 					</Text>

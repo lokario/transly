@@ -7,7 +7,9 @@ interface MessageProps {
 }
 
 function Message({ text, isOwn }: MessageProps) {
+	const textColor = useColorModeValue("black", "white");
 	const msgShadow = useColorModeValue("input", "inputDark");
+	const bgColor = useColorModeValue("brand.input", "brand.dark.input");
 
 	return (
 		<Flex
@@ -23,12 +25,12 @@ function Message({ text, isOwn }: MessageProps) {
 			)}
 
 			<Flex
-				bg={isOwn ? "brand.accent" : useColorModeValue("brand.input", "brand.dark.input")}
+				bg={isOwn ? "brand.accent" : bgColor}
 				alignItems="center"
 				borderRadius="100"
 				boxShadow={isOwn ? "msgOwn" : msgShadow}
 				p="0rem 1.25rem"
-				color={isOwn ? "white" : useColorModeValue("black", "white")}>
+				color={isOwn ? "white" : textColor}>
 				{text}
 			</Flex>
 

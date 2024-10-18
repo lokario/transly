@@ -17,6 +17,7 @@ function Entry({ onMsgSend }: { onMsgSend: (msg: string) => void }) {
 	};
 
 	const inputShadow = useColorModeValue("input", "inputDark");
+	const bgColor = useColorModeValue("brand.input", "brand.dark.input");
 
 	return (
 		<Box
@@ -30,7 +31,7 @@ function Entry({ onMsgSend }: { onMsgSend: (msg: string) => void }) {
 					placeholder="Send a new message to translate"
 					p="1.7rem"
 					pr="4rem"
-					bg={useColorModeValue("brand.input", "brand.dark.input")}
+					bg={bgColor}
 					border={0}
 					boxShadow={inputShadow}
 					size="lg"

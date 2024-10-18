@@ -1,5 +1,5 @@
-import { openDatabase } from "@/lib/chatbotDB";
 import { useState } from "react";
+import { openDatabase } from "../../lib/chatbotDB";
 
 export interface Message {
 	id: number;

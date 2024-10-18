@@ -10,6 +10,8 @@ interface TopBarProps {
 }
 
 function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarProps) {
+	const bgColor = useColorModeValue("brand.input", "brand.dark.input");
+
 	return (
 		<Box>
 			<Flex
@@ -21,7 +23,7 @@ function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarPr
 						value={sourceLang}
 						aria-label="Source Language"
 						onChange={e => onSourceLang(e.target.value)}
-						bg={useColorModeValue("brand.input", "brand.dark.input")}
+						bg={bgColor}
 						sx={{
 							_focus: {
 								boxShadow: "none",
@@ -47,7 +49,7 @@ function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarPr
 						value={targetLang}
 						aria-label="Target Language"
 						onChange={e => onTargetLang(e.target.value)}
-						bg={useColorModeValue("brand.input", "brand.dark.input")}
+						bg={bgColor}
 						sx={{
 							_focus: {
 								boxShadow: "none",

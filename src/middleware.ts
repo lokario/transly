@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import redis from "@/lib/redis";
+import redis from "./lib/redis";
 
 const RATE_LIMIT = 60;
 const WINDOW_SIZE_IN_SECONDS = 60;

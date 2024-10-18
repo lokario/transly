@@ -13,6 +13,10 @@ interface ChatSessionProps {
 }
 
 function ChatSession({ activeSessionId, session, onSelectSession, handleSessionDelete, renameChatSession }: ChatSessionProps) {
+	const textColor = useColorModeValue("gray.500", "gray.400");
+	const textColorActive = useColorModeValue("gray.500", "gray.50");
+	const bgColor = useColorModeValue("brand.highlight", "brand.dark.highlight");
+
 	const EditableWrapper = ({ handleSessionDelete }: { handleSessionDelete: (id: number) => void }) => {
 		const { isEditing, getEditButtonProps } = useEditableControls();
 
@@ -52,26 +56,26 @@ function ChatSession({ activeSessionId, session, onSelectSession, handleSessionD
 		<Editable
 			defaultValue={session.name}
 			fontSize={16}
-			color={session.id == activeSessionId ? useColorModeValue("gray.500", "gray.50") : useColorModeValue("gray.500", "gray.400")}
+			color={session.id == activeSessionId ? textColorActive : textColor}
 			fontWeight="medium"
 			isPreviewFocusable={false}
 			onSubmit={newName => renameChatSession(session.id, newName)}>
 			<Flex
 				key={session.id}
 				p={3}
-				bg={session.id == activeSessionId ? useColorModeValue("brand.highlight", "brand.dark.highlight") : "transparent"}
+				bg={session.id == activeSessionId ? bgColor : "transparent"}
 				borderRadius="lg"
 				alignItems="center"
 				justifyContent="space-between"
 				cursor="pointer"
-				_hover={{ bg: useColorModeValue("brand.highlight", "brand.dark.highlight"), color: useColorModeValue("gray.500", "gray.50") }}
+				_hover={{ bg: bgColor, color: textColorActive }}
 				onClick={() => onSelectSession(session.id)}
 				role="group">
 				<HStack spacing={3}>
 					<ChatIcon
 						boxSize="20px"
-						color={session.id == activeSessionId ? useColorModeValue("gray.500", "gray.50") : useColorModeValue("gray.500", "gray.400")}
-						_groupHover={{ color: useColorModeValue("gray.500", "gray.50") }}
+						color={session.id == activeSessionId ? textColorActive : textColor}
+						_groupHover={{ color: textColorActive }}
 					/>
 					<EditablePreview />
 					<Input as={EditableInput} />

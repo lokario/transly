@@ -1,4 +1,4 @@
-import { Message as IMessage } from "@/app/page";
+import { Message as IMessage } from "../../hooks/useMessages";
 import { VStack } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import Message from "../Message";

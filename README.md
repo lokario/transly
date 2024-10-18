@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Transly - A Real-Time Language Translation Chatbot
 
-## Getting Started
+Transly is a real-time language translation chatbot designed to facilitate seamless multilingual communication. Users can send messages in one language and instantly receive translations in another. Whether you're traveling, studying, or collaborating across different languages, Transly helps bridge communication gaps effortlessly.
 
-First, run the development server:
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation & Setup](#installation--setup)
+- [Running the Application](#running-the-application)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Project Overview
+
+Transly revolutionizes communication by translating messages instantly between selected languages, making it ideal for individuals, businesses, and communities looking to engage with others globally. The system combines modern technologies such as Next.js, Chakra UI, and a robust translation API to deliver an intuitive chat experience that retains context and provides ongoing conversations across sessions.
+
+## Features
+
+- **Real-Time Language Translation**: Messages are translated instantly, breaking down language barriers.
+- **Customizable Language Preferences**: Users can select and save their preferred source and target languages, ensuring a consistent and personalized experience.
+- **Automatic Session Management**: Chat sessions are automatically created, stored, and restored—providing continuity between user interactions.
+- **Responsive and Intuitive UI**: Built with Chakra UI, Transly offers a visually appealing interface optimized for mobile, tablet, and desktop devices.
+- **IndexedDB Storage for Persistence**: User data, such as messages and language settings, are stored locally for session continuity, even after refreshing.
+
+## Technologies Used
+
+- **Next.js 13**: The core framework used to build the application, featuring the App Router for modern routing capabilities, server-side rendering (SSR), and static site generation (SSG).
+- **TypeScript**: Enhances the development experience by providing type safety, reducing bugs, and ensuring robust code quality.
+- **Chakra UI**: A modular and accessible component library for building a responsive, visually appealing, and cohesive user interface.
+- **Google Cloud Translation API**: Powers the real-time translation capabilities, enabling users to communicate seamlessly across different languages.
+- **Upstash Redis**: Used to cache translation results, improving performance and reducing latency for frequently translated messages. Requires an API key for authentication.
+- **IndexedDB**: Stores chat sessions and messages locally, ensuring persistence even when the application is refreshed, providing offline support.
+- **Jest**: Tool used for unit testing and component testing, ensuring that all components function correctly and that new changes do not introduce regressions.
+
+## Installation & Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/lokario/transly.git
+   cd transly
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Environment Variables**:
+
+   Create a `.env.local` file in the root directory and add the following variables:
+   ```env
+   GOOGLE_API_KEY=your_api_key
+   TRANSLATION_API_URL=https://translation.googleapis.com/language/translate/v2
+   UPSTASH_ENDPOINT=your_upstash_endpoint
+   UPSTASH_PASSWORD=your_upstash_password
+   ```
+
+## Running the Application
+
+To run the application locally:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) in your browser to start chatting!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Testing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Run Unit and Integration Tests**:
+   ```bash
+   npm run test
+   ```
 
-## Learn More
+2. **Generate Test Coverage**:
+   ```bash
+   npm run test -- --coverage
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+   The coverage report will be generated in the `coverage` directory, showcasing insights into code coverage and ensuring reliability.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+I'd appreciate any contributions to make Transly even better!
 
-## Deploy on Vercel
+1. **Fork the Repository**: Click on "Fork" at the top right of this page.
+2. **Create Your Feature Branch**:
+   ```bash
+   git checkout -b feature/YourFeatureName
+   ```
+3. **Commit Your Changes**:
+   ```bash
+   git commit -m 'Add some feature'
+   ```
+4. **Push to the Branch**:
+   ```bash
+   git push origin feature/YourFeatureName
+   ```
+5. **Open a Pull Request**: Submit a pull request for review.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

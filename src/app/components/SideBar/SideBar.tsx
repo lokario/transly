@@ -1,4 +1,4 @@
-import { Box, Button, Heading, HStack, Image, Skeleton, SkeletonText, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { Box, Button, Heading, HStack, Image, SkeletonText, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 import { RiAddLargeLine } from "react-icons/ri";
 import ChatSession from "../ChatSession";
 
@@ -13,6 +13,9 @@ interface SideBarProps {
 }
 
 function SideBar({ chatSessionsLoading, activeSessionId, chatSessions, onSelectSession, handleSessionDelete, newChatSession, renameChatSession }: SideBarProps) {
+	const scrollStyle = useColorModeValue("neat-scroll", "neat-scroll dark");
+	const logoImage = useColorModeValue("/assets/transly.svg", "/assets/transly_dark.svg");
+
 	return (
 		<Box
 			h="100vh"
@@ -26,7 +29,7 @@ function SideBar({ chatSessionsLoading, activeSessionId, chatSessions, onSelectS
 				<Image
 					width="48px"
 					alt="Logo"
-					src={useColorModeValue("/assets/transly.svg", "/assets/transly_dark.svg")}
+					src={logoImage}
 				/>
 				<Text
 					color="brand.accent"
@@ -53,7 +56,7 @@ function SideBar({ chatSessionsLoading, activeSessionId, chatSessions, onSelectS
 				spacing={3}
 				overflowY="auto"
 				padding="0 10px"
-				className={useColorModeValue("neat-scroll", "neat-scroll dark")}
+				className={scrollStyle}
 				flex={1}>
 				{chatSessionsLoading ? (
 					<>

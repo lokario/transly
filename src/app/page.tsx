@@ -1,5 +1,6 @@
 "use client";
 
+import { HamburgerIcon } from "@chakra-ui/icons";
 import {
 	AlertDialog,
 	AlertDialogBody,
@@ -11,9 +12,7 @@ import {
 	Button,
 	Drawer,
 	DrawerBody,
-	DrawerCloseButton,
 	DrawerContent,
-	DrawerHeader,
 	DrawerOverlay,
 	Grid,
 	GridItem,
@@ -25,15 +24,14 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import ChatBot from "./components/ChatBot";
+import ColorModeToggle from "./components/ColorModeToggle";
+import PrivacyConsent from "./components/PrivacyConsent";
 import SideBar from "./components/SideBar";
 import { useChatSessions } from "./hooks/useChatSessions";
+import { useLangPreferences } from "./hooks/useLangPreferences";
 import { useMessages } from "./hooks/useMessages";
 import { useTranslation } from "./hooks/useTranslation";
 import "./styles/globals.css";
-import { useLangPreferences } from "./hooks/useLangPreferences";
-import PrivacyConsent from "./components/PrivacyConsent";
-import { HamburgerIcon } from "@chakra-ui/icons";
-import ColorModeToggle from "./components/ColorModeToggle";
 
 export default function Home() {
 	const { sourceLang, targetLang, saveSourceLang, saveTargetLang } = useLangPreferences();
@@ -45,6 +43,17 @@ export default function Home() {
 	const { translateMessage, error } = useTranslation();
 	const { chatSessions, activeSessionId, setActiveSessionId, chatSessionsLoading, newChatSession, deleteSession, renameChatSession } = useChatSessions();
 	const { messages, fetchMessages, addMessage, deleteMessagesForSession } = useMessages();
+
+	const [isVisible, setIsVisible] = useState(false);
+
+	useEffect(() => {
+		setIsVisible(!localStorage.getItem("privacyConsent"));
+	});
+
+	const handleAccept = () => {
+		localStorage.setItem("privacyConsent", "accepted");
+		setIsVisible(false);
+	};
 
 	const bgColor = useColorModeValue("white", "brand.dark.bg");
 
@@ -102,7 +111,10 @@ export default function Home() {
 
 	return (
 		<>
-			<PrivacyConsent />
+			<PrivacyConsent
+				isVisible={isVisible}
+				handleAccept={handleAccept}
+			/>
 			<AlertDialog
 				isOpen={isOpen}
 				leastDestructiveRef={cancelRef}
@@ -115,7 +127,7 @@ export default function Home() {
 							Delete Chat
 						</AlertDialogHeader>
 
-						<AlertDialogBody>Are you sure? You can't undo this action afterwards.</AlertDialogBody>
+						<AlertDialogBody>Are you sure? You can&apos;t undo this action afterwards.</AlertDialogBody>
 
 						<AlertDialogFooter>
 							<Button
