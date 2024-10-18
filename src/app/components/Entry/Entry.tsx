@@ -47,7 +47,7 @@ function Entry({ onMsgSend }: { onMsgSend: (msg: string) => void }) {
 						isRound={true}
 						variant="solid"
 						fontSize="20px"
-						aria-label="Search database"
+						aria-label="send"
 						onClick={sendMessage}
 						icon={<IoSend />}
 					/>

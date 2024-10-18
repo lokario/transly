@@ -4,7 +4,7 @@ import Topbar from "../TopBar";
 import { Message } from "@/app/page";
 import Messages from "../Messages";
 
-interface ChatBotProps {
+export interface ChatBotProps {
 	error: string;
 	targetLang: string;
 	sourceLang: string;

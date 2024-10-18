@@ -1,3 +1,3 @@
-import PrivacyConsent from "./PrivacyContent";
+import PrivacyConsent from "./PrivacyConsent";
 
 export default PrivacyConsent;

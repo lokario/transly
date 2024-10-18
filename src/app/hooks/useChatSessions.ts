@@ -78,7 +78,6 @@ export const useChatSessions = () => {
 	};
 
 	const addChatSession = async (db: IDBPDatabase<unknown>) => {
-		debugger;
 		const now = new Date();
 		const timeString = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true });
 		const newSession = {

@@ -19,6 +19,7 @@ function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarPr
 				<HStack>
 					<Select
 						value={sourceLang}
+						aria-label="Source Language"
 						onChange={e => onSourceLang(e.target.value)}
 						bg={useColorModeValue("brand.input", "brand.dark.input")}
 						sx={{
@@ -44,6 +45,7 @@ function Topbar({ onSourceLang, onTargetLang, targetLang, sourceLang }: TopBarPr
 					</Box>
 					<Select
 						value={targetLang}
+						aria-label="Target Language"
 						onChange={e => onTargetLang(e.target.value)}
 						bg={useColorModeValue("brand.input", "brand.dark.input")}
 						sx={{

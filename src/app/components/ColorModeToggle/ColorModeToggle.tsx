@@ -12,6 +12,7 @@ const ColorModeToggle = () => {
 			position="absolute"
 			top={4}
 			right={4}
+			data-testid="color-mode-toggle"
 		/>
 	);
 };

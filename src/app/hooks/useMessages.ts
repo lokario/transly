@@ -61,6 +61,8 @@ export const useMessages = () => {
 				if (cursor.value.sessionId === sessionId) await cursor.delete();
 				await cursor.continue();
 			}
+
+			if (messages.length && messages[0].sessionId == sessionId) setMessages([]);
 		} catch (error) {
 			console.error("Error deleting messages:", error);
 		}
